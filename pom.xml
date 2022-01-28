@@ -12,7 +12,7 @@
     <artifactId>spring-mirai-server</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>spring-mirai-server</name>
-    <description>Demo project for Spring Boot</description>
+    <description>Yellow hat for Spring Boot</description>
 
     <properties>
         <java.version>1.8</java.version>
@@ -23,7 +23,7 @@
         <dependency>
             <groupId>net.lz1998</groupId>
             <artifactId>pbbot-spring-boot-starter</artifactId>
-            <version>0.0.27</version>
+            <version>0.0.31</version>
         </dependency>
 
         <dependency>
@@ -55,6 +55,40 @@
                     <artifactId>junit-vintage-engine</artifactId>
                 </exclusion>
             </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpclient</artifactId>
+            <version>4.5.13</version>
+        </dependency>
+
+
+        <dependency>
+            <groupId>com.google.code.gson</groupId>
+            <artifactId>gson</artifactId>
+            <version>2.8.7</version>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- 大数据导入导出 -->
+        <dependency>
+            <groupId>cn.afterturn</groupId>
+            <artifactId>easypoi-base</artifactId>
+            <version>4.1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>cn.afterturn</groupId>
+            <artifactId>easypoi-web</artifactId>
+            <version>4.1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>cn.afterturn</groupId>
+            <artifactId>easypoi-annotation</artifactId>
+            <version>4.1.0</version>
         </dependency>
     </dependencies>
 

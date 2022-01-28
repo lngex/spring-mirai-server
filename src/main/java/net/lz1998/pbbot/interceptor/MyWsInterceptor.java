@@ -11,6 +11,8 @@ import org.springframework.web.socket.WebSocketSession;
 @Primary
 @Component
 public class MyWsInterceptor extends BotSessionInterceptor {
+
+
     @SneakyThrows
     @Override
     public boolean checkSession(@NotNull WebSocketSession session) {
@@ -21,8 +23,10 @@ public class MyWsInterceptor extends BotSessionInterceptor {
         if ("123".equals(botId)) {
             System.out.println("机器人账号是123，关闭连接");
             session.close();
-            return false; // 禁止连接
+            // 禁止连接
+            return false;
         }
-        return true; // 正常连接
+        // 正常连接
+        return true;
     }
 }
