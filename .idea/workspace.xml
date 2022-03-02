@@ -4,32 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f91ff761-ca10-44ba-b55f-d0f74c38a550" name="Changes" comment="Changes">
-      <change afterPath="$PROJECT_DIR$/src/main/java/net/lz1998/pbbot/basic/MyBeanConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/net/lz1998/pbbot/basic/MyScableTask.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/net/lz1998/pbbot/basic/config/AsyncConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/net/lz1998/pbbot/basic/domain/QqBoung.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/net/lz1998/pbbot/basic/domain/netease/NeteaseMusic.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/net/lz1998/pbbot/basic/domain/qqMusic/Data.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/net/lz1998/pbbot/basic/domain/qqMusic/Resulit.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/net/lz1998/pbbot/plugin/IntercepterPlugin.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/lz1998/pbbot/SpringMiraiServerApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/lz1998/pbbot/SpringMiraiServerApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/lz1998/pbbot/async/DatePersistenceAsync.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/lz1998/pbbot/async/DatePersistenceAsync.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/lz1998/pbbot/basic/GroupRouter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/lz1998/pbbot/basic/GroupRouter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/lz1998/pbbot/basic/constant/MapConstant.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/lz1998/pbbot/basic/constant/MapConstant.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/lz1998/pbbot/basic/constant/PublicConstant.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/lz1998/pbbot/basic/constant/PublicConstant.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/lz1998/pbbot/basic/constant/minCartoon/UrlConstant.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/lz1998/pbbot/basic/constant/minCartoon/UrlConstant.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/lz1998/pbbot/basic/domain/Data.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/lz1998/pbbot/basic/domain/Data.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/lz1998/pbbot/basic/domain/MinAi.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/lz1998/pbbot/basic/domain/MinAi.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/lz1998/pbbot/basic/domain/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/lz1998/pbbot/basic/domain/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/lz1998/pbbot/controller/ImageController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/lz1998/pbbot/controller/ImageController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/lz1998/pbbot/plugin/AtBotPlugin.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/lz1998/pbbot/plugin/AtBotPlugin.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/lz1998/pbbot/plugin/ImagePlugin.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/lz1998/pbbot/plugin/ImagePlugin.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/lz1998/pbbot/util/RouteUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/lz1998/pbbot/util/RouteUtils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/lz1998/pbbot/util/TestUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/lz1998/pbbot/util/TestUtils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.yml" afterDir="false" />
-    </list>
+    <list default="true" id="f91ff761-ca10-44ba-b55f-d0f74c38a550" name="Changes" comment="项目代码" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -298,7 +273,7 @@
       <workItem from="1646106730303" duration="2936000" />
       <workItem from="1646181562395" duration="3077000" />
       <workItem from="1646186051417" duration="1853000" />
-      <workItem from="1646203840811" duration="6063000" />
+      <workItem from="1646203840811" duration="6134000" />
     </task>
     <task id="LOCAL-00001" summary="Changes">
       <created>1643363848824</created>
@@ -307,7 +282,14 @@
       <option name="project" value="LOCAL" />
       <updated>1643363848824</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="项目代码">
+      <created>1646211811736</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1646211811736</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -327,7 +309,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Changes" />
-    <option name="LAST_COMMIT_MESSAGE" value="Changes" />
+    <MESSAGE value="项目代码" />
+    <option name="LAST_COMMIT_MESSAGE" value="项目代码" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
