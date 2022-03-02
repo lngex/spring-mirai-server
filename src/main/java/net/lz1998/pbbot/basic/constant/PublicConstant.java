@@ -11,7 +11,7 @@ public interface PublicConstant {
     /**
      * 小爱机器人API
      */
-    String MINAI = "https://api.shy-jan.xyz/api/小爱同学.php?msg=%s";
+    String MINAI = "http://ruohuan.xiaoapi.cn/API/other/xiaoai.php?msg=%s";
     /**
      * 小小漫迷1080P
      */
@@ -25,7 +25,8 @@ public interface PublicConstant {
      */
     String MENU = "" +
             "[群管系统]\uD83C\uDF38[娱乐系统]\n" +
-            "[排行系统]\uD83C\uDF38[其他]\n";
+            "[排行系统]\uD83C\uDF38[日常]\n"+
+            "[其他]\n";
     /**
      * 群管系统
      */
@@ -39,15 +40,25 @@ public interface PublicConstant {
      */
     String ENTERTAINMENT = "" +
             "[看美女]\uD83C\uDF38[动漫+动漫名]\n" +
-            "[舔狗日记]\uD83C\uDF38[情话]\n";
+            "[点歌]\uD83C\uDF38[网易点歌]\n";
     /**
      * 排行系统
      */
     String SORTSYSTEM = "" +
-            "[入群榜]";
+            "[入群榜]\uD83C\uDF38[土豪榜]";
+
+    /**
+     * 日常
+     */
+    String EVERYDAY = "" +
+            "[打卡/签到]";
     /**
      * 其他
      */
     String OTHER = "" +
-            "[AI聊天]\uD83C\uDF38[闪照破解]\n";
+            "[AI聊天]\uD83C\uDF38[闪照破解]\n"+
+            "[舔狗日记]\uD83C\uDF38[情话]\n"+
+            "[经典语录]\uD83C\uDF38[60秒读世界]\n"+
+            "[搜图]\uD83C\uDF38[历史上的今天]\n"+
+            "[举牌]\n";
 }

@@ -3,9 +3,12 @@ package net.lz1998.pbbot.util;
 import onebot.OnebotEvent;
 import org.springframework.util.StringUtils;
 
+import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Arrays;
 
 /**
  * 路由工具
@@ -33,9 +36,15 @@ public class RouteUtils {
     }
 
     public static void main(String[] args) {
-        int count=0;
-        while (count++ <= 100){
-            System.out.println(count);
-        }
+       String str1 = "abcdefg*&^7";
+       String str2 = "简书谢谢，。";
+        byte[] bytes = str1.getBytes(StandardCharsets.UTF_8);
+        System.out.println("str1："+ Arrays.toString(bytes));
+        byte[] bytes1 = str2.getBytes(StandardCharsets.UTF_8);
+        System.out.println("str2："+Arrays.toString(bytes1));
+        bytes1[1] = -82;
+        String string = new String(bytes1, StandardCharsets.UTF_8);
+        System.out.println(Arrays.toString(bytes1));
+        System.out.println(string);
     }
 }

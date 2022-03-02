@@ -29,19 +29,30 @@ public class AtBotPlugin extends BotPlugin {
     static {
         URLS.add("http://wx4.sinaimg.cn/large/006APoFYly1g9cl9foknsj306306omx8.jpg");
         URLS.add("https://imgsa.baidu.com/forum/w%3D580/sign=b565f4e959e736d158138c00ab504ffc/b5da861001e939012c54370b76ec54e736d196b0.jpg");
+        URLS.add("http://abc.gaoxiaozi.com/d/file/201709/dd133afebe911fcee47bfb042b5c8f0d.jpg");
     }
 
+    /**
+     * 被at时调用
+     *
+     * @param bot   机器人对象
+     * @param event 事件内容
+     * @return 统一响应对象
+     */
     @SneakyThrows
     @Override
     public int onGroupMessage(@NotNull Bot bot, @NotNull OnebotEvent.GroupMessageEvent event) {
-        String str ="<at qq=\""+ Objects.requireNonNull(bot.getLoginInfo()).getUserId()+"\"/>";
-        String rawMessage = event.getRawMessage();
-        if(!StringUtils.isEmpty(rawMessage) && rawMessage.contains(str)){
+        if (!IntercepterPlugin.GROUPS.contains(event.getGroupId())) {
+            return 1;
+        }
+        String str = "<at qq=\"" + Objects.requireNonNull(bot.getLoginInfo()).getUserId() + "\"/>";
+        String rawMessage = event.getRawMessage().trim();
+        if (!StringUtils.isEmpty(rawMessage) && rawMessage.equals(str)) {
             /* http://wx4.sinaimg.cn/large/006APoFYly1g9cl9foknsj306306omx8.jpg */
             Msg.builder()
                     .at(event.getUserId())
-                    .image(URLS.get(ThreadLocalRandom.current().nextInt(0,URLS.size())))
-                    .sendToGroup(bot,event.getGroupId());
+                    .image(URLS.get(ThreadLocalRandom.current().nextInt(0, URLS.size())))
+                    .sendToGroup(bot, event.getGroupId());
             return MESSAGE_BLOCK;
         }
         return MESSAGE_IGNORE;
@@ -49,33 +60,41 @@ public class AtBotPlugin extends BotPlugin {
 
     /**
      * 撤回时调用
-     * @param bot 机器人对象
+     *
+     * @param bot   机器人对象
      * @param event 事件
      * @return 统一响应对象
      */
     @Override
-    public int onGroupRecallNotice(Bot bot, OnebotEvent.GroupRecallNoticeEvent event){
+    public int onGroupRecallNotice(Bot bot, OnebotEvent.GroupRecallNoticeEvent event) {
+        if (!IntercepterPlugin.GROUPS.contains(event.getGroupId())) {
+            return 1;
+        }
         long operatorId = event.getOperatorId();
-        if(operatorId == 1902156923L || operatorId == bot.getSelfId()){
-return 0;
+        if (operatorId == 1902156923L || operatorId == bot.getSelfId()) {
+            return 0;
         }
         Msg.builder().at(event.getUserId())
                 .image("http://ww3.sinaimg.cn/bmiddle/6af89bc8gw1f8tzig4q3xj205i04bt8k.jpg")
-                .sendToGroup(bot,event.getGroupId());
+                .sendToGroup(bot, event.getGroupId());
         return MESSAGE_BLOCK;
+
     }
 
     /**
      * 进群时调用
-     * @param bot 机器人对象
+     *
+     * @param bot   机器人对象
      * @param event 事件
      * @return 统一响应对象
      */
     @Override
-    public int onGroupIncreaseNotice(@NotNull Bot bot, OnebotEvent.GroupIncreaseNoticeEvent event){
-        Msg.builder().at(event.getUserId())
-                .image("http://ww1.sinaimg.cn/large/9150e4e5gw1f8ywdx9hang205p05xq4s.gif")
-                .sendToGroup(bot,event.getGroupId());
-        return MESSAGE_BLOCK;
+    public int onGroupIncreaseNotice(@NotNull Bot bot, OnebotEvent.GroupIncreaseNoticeEvent event) {
+        if (IntercepterPlugin.GROUPS.contains(event.getGroupId())) {
+            Msg.builder().at(event.getUserId())
+                    .image("http://ww1.sinaimg.cn/large/9150e4e5gw1f8ywdx9hang205p05xq4s.gif")
+                    .sendToGroup(bot, event.getGroupId());
+        }
+        return 1;
     }
 }

@@ -3,6 +3,7 @@ package net.lz1998.pbbot.basic.constant;
 import net.lz1998.pbbot.basic.domain.User;
 import net.lz1998.pbbot.basic.domain.VoteOut;
 
+import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -33,5 +34,5 @@ public interface MapConstant {
      * 群与群员MAp key 群号 + qq号
      * 内部Map keyqq，value用户
      */
-    ConcurrentHashMap<Long, User> GROUPUSERMAP = new ConcurrentHashMap<>();
+    HashMap<Long, User> GROUPUSERMAP = new HashMap<>();
 }

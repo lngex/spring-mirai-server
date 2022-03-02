@@ -1,16 +1,23 @@
 package net.lz1998.pbbot.controller;
 
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.methods.HttpUriRequest;
+import org.apache.http.client.utils.HttpClientUtils;
+import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.impl.client.HttpClients;
 import org.springframework.context.annotation.Bean;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.BufferedImageHttpMessageConverter;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.imageio.ImageIO;
+import javax.servlet.http.HttpServletResponse;
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.io.IOException;
+import java.io.*;
 import java.net.URL;
 
 @RestController
@@ -48,5 +55,10 @@ public class ImageController {
     public BufferedImage getAvatar(Long qq) throws IOException {
         URL url = new URL("https://q2.qlogo.cn/headimg_dl?dst_uin=" + qq.toString() + "&spec=3");
         return ImageIO.read(url);
+    }
+
+    public static void main(String[] args) {
+
+
     }
 }

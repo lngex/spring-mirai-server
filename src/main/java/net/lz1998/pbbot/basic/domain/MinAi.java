@@ -18,5 +18,5 @@ public class MinAi {
     /**
      * 语音链接
      */
-    private String url;
+    private String mp3;
 }

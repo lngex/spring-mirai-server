@@ -14,6 +14,9 @@ import org.springframework.stereotype.Component;
 public class ImagePlugin extends BotPlugin {
     @Override
     public int onGroupMessage(@NotNull Bot bot, @NotNull OnebotEvent.GroupMessageEvent event) {
+        if (!IntercepterPlugin.GROUPS.contains(event.getGroupId())) {
+            return 1;
+        }
         // 群号
         long groupId = event.getGroupId();
         // 发送者QQ

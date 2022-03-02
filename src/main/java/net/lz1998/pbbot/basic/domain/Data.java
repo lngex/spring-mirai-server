@@ -12,5 +12,6 @@ import java.util.List;
 @lombok.Data
 public class Data {
     private String Title;
+    private String Mid;
     private List<String> data;
 }

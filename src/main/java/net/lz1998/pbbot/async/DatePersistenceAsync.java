@@ -13,6 +13,7 @@ import org.springframework.stereotype.Component;
 
 import java.io.FileOutputStream;
 import java.io.OutputStream;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.concurrent.locks.ReentrantLock;
 
@@ -34,16 +35,17 @@ public class DatePersistenceAsync {
      */
     @SneakyThrows
     @Async
-    public void userPersistence(){
+    public void userPersistence() {
         String s = FileUtils.pojertPath();
         LOCK.lock();
-        try(OutputStream outputStream = new FileOutputStream(s+"\\user.xls")) {
+        try (OutputStream outputStream = new FileOutputStream(s + "/user.xls")) {
             Collection<User> values = MapConstant.GROUPUSERMAP.values();
-            Workbook workbook = ExcelExportUtil.exportExcel(new ExportParams("群员资料","sheet1"),
-                    User.class, values);
+            ArrayList<User> objects = new ArrayList<>(values);
+            Workbook workbook = ExcelExportUtil.exportExcel(new ExportParams("群员资料", "sheet1"),
+                    User.class, objects);
             workbook.write(outputStream);
             workbook.close();
-        }finally {
+        } finally {
             LOCK.unlock();
         }
     }

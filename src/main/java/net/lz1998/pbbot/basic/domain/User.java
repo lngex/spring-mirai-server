@@ -37,4 +37,8 @@ public class User implements Serializable {
      */
     @Excel(name = "黑名单")
     private Boolean isBolk = false;
+    /**
+     * 是否已签到
+     */
+    private Boolean isSingin = false;
 }

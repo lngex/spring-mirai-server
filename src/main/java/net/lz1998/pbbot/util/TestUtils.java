@@ -1,9 +1,11 @@
 package net.lz1998.pbbot.util;
 
-import net.lz1998.pbbot.basic.constant.minCartoon.UrlConstant;
-import net.lz1998.pbbot.basic.constant.xml.XmlConstant;
+import lombok.SneakyThrows;
+import org.apache.commons.compress.utils.IOUtils;
 
-import java.util.concurrent.ThreadLocalRandom;
+import java.io.*;
+import java.util.*;
+import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * TODO
@@ -13,8 +15,12 @@ import java.util.concurrent.ThreadLocalRandom;
  * @since 1.0.0
  */
 public class TestUtils {
+
+    private static  final String str = "E:\\bot\\Go-Mirai-Client_lorca_0.2.4_windows_amd64.exe";
+    private static  final String str2 = "E:\\bot\\Go-Mirai-Client_lorca_0.2.4_windows_amd645.exe";
+    private static  final String str3 = "E:\\bot\\Go-Mirai-Client_lorca_0.2.4_windows_amd646.exe";
+
     public static void main(String[] args) {
-        // System.out.println(HttpClientUtils.doGet(String.format(UrlConstant.MUSIC,"青花瓷")));
-        System.out.println(HttpClientUtils.doGet("http://api.weijieyue.cn/api/youhuo/api.php?return=txt"));
+        System.out.println(System.currentTimeMillis() / 1000L);
     }
 }
