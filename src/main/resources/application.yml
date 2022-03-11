@@ -4,8 +4,6 @@ spring:
       - cn.ling.bot.plugin.IntercepterPlugin # 拦截器
       - cn.ling.bot.plugin.AtBotPlugin # 艾特插件
       - cn.ling.bot.plugin.LogPlugin # 日志插件
-      #- net.lz1998.pbbot.plugin.DemoPlugin # 测试插件
-      #- net.lz1998.pbbot.plugin.ImagePlugin # 动态生成图片插件
       - cn.ling.bot.plugin.MyPlugin # 我的插件
 
 server:
