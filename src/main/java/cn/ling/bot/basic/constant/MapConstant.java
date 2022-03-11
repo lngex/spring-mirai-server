@@ -4,6 +4,7 @@ import cn.ling.bot.basic.domain.User;
 import cn.ling.bot.basic.domain.VoteOut;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
@@ -34,4 +35,9 @@ public interface MapConstant {
      * 内部Map keyqq，value用户
      */
     HashMap<Long, User> GROUPUSERMAP = new HashMap<>();
+    /**
+     * 群与群员MAp key 群号 + : + qq号 + ":" 机器人qq号
+     * 内部List,彩票号码集合
+     */
+    HashMap<String, List<Integer>> POWERBALL = new HashMap<>();
 }

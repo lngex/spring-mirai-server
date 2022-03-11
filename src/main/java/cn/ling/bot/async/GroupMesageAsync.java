@@ -390,9 +390,9 @@ public class GroupMesageAsync {
             Msg.builder().at(userId).text(s).sendToGroup(bot, groupId);
         } else if (
                 "60秒读世界".equals(rawMsg)
-                || "60s读世界".equals(rawMsg)
-                || "60s看世界".equals(rawMsg)
-                || "60秒看世界".equals(rawMsg)
+                        || "60s读世界".equals(rawMsg)
+                        || "60s看世界".equals(rawMsg)
+                        || "60秒看世界".equals(rawMsg)
         ) {
             Msg.builder().image("http://api.klizi.cn/API/other/60s.php").sendToGroup(bot, groupId);
         } else if (rawMsg.startsWith("搜图") && rawMsg.length() > 2) {
@@ -849,5 +849,49 @@ public class GroupMesageAsync {
      */
     public void updateName(Bot bot, OnebotEvent.GroupMessageEvent event) {
 
+    }
+
+    /**
+     * 彩票
+     *
+     * @param bot   机器人对象
+     * @param event 事件对象
+     */
+    public void powerball(Bot bot, OnebotEvent.GroupMessageEvent event) {
+        String rawMessage = event.getRawMessage().trim();
+        if (rawMessage.startsWith("购买彩票") && rawMessage.length() > 4) {
+            String number = rawMessage.substring(4).trim();
+            if (number.length() != 6 || number.contains(" ")) {
+                Msg.builder().at(event.getUserId()).text("购买失败，彩票格式错误").sendToGroup(bot, event.getGroupId());
+                return;
+            }
+            Integer integer;
+            try {
+                integer = new Integer(number);
+            } catch (Exception e) {
+                Msg.builder().at(event.getUserId()).text("购买失败，彩票格式错误").sendToGroup(bot, event.getGroupId());
+                return;
+            }
+            User user = MapConstant.GROUPUSERMAP.get(event.getGroupId() + event.getUserId());
+            if (user == null) {
+                Msg.builder().at(event.getUserId()).text("购买失败，积分不足，你当前积分为0").sendToGroup(bot, event.getGroupId());
+            } else if (user.getIntegrate().compareTo(new BigDecimal("2")) < 0) {
+                Msg.builder().at(event.getUserId()).text("购买失败，积分不足，你当前积分为"+user.getIntegrate()).sendToGroup(bot, event.getGroupId());
+            }else {
+                String key = event.getGroupId() + ":" + event.getUserId()+":"+ Objects.requireNonNull(bot.getLoginInfo()).getUserId();
+                List<Integer> integers = MapConstant.POWERBALL.get(key);
+                if(integers == null){
+                    integers = new ArrayList<>();
+                }
+                integers.add(integer);
+                MapConstant.POWERBALL.put(key,integers);
+                user.setIntegrate(user.getIntegrate().subtract(new BigDecimal("2")));
+                MapConstant.GROUPUSERMAP.put(event.getGroupId() + event.getUserId(),user);
+                datePersistenceAsync.userPersistence();
+                Msg.builder().at(event.getUserId()).text("购买成功，请耐心等待开奖").sendToGroup(bot, event.getGroupId());
+            }
+        }else if("彩票系统".equals(rawMessage)){
+            Msg.builder().text(PublicConstant.POWERBALL).sendToGroup(bot, event.getGroupId());
+        }
     }
 }

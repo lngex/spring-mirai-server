@@ -1,5 +1,7 @@
 package cn.ling.bot.util;
 
+import javax.swing.*;
+
 /**
  * TODO
  *
@@ -9,11 +11,11 @@ package cn.ling.bot.util;
  */
 public class TestUtils {
 
-    private static  final String str = "E:\\bot\\Go-Mirai-Client_lorca_0.2.4_windows_amd64.exe";
-    private static  final String str2 = "E:\\bot\\Go-Mirai-Client_lorca_0.2.4_windows_amd645.exe";
-    private static  final String str3 = "E:\\bot\\Go-Mirai-Client_lorca_0.2.4_windows_amd646.exe";
 
-    public static void main(String[] args) {
-        System.out.println(System.currentTimeMillis() / 1000L);
+    public static void main(String[] args) throws InterruptedException {
+        JFrame jFrame = new JFrame();
+        jFrame.setSize(100,200);
+        jFrame.setVisible(true);
     }
+
 }

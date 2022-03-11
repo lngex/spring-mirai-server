@@ -51,6 +51,8 @@ public class GroupRouter {
             groupMesageAsync.neteaseMusic(bot, event);
             // 全体改名
             groupMesageAsync.allRename(bot, event);
+            // 彩票
+            groupMesageAsync.powerball(bot, event);
         } else if (1050122161L == groupId) {
             groupMesageAsync.test(bot, event);
             groupMesageAsync.girlImg(bot, event);
@@ -65,6 +67,8 @@ public class GroupRouter {
             groupMesageAsync.neteaseMusic(bot, event);
             // 查绑定
             groupMesageAsync.qqBound(bot, event);
+            // 彩票
+            groupMesageAsync.powerball(bot, event);
         } else if (793893098 == groupId) {
             // 动漫
             // groupMesageAsync.lookCartoon(bot,event);
@@ -81,6 +85,8 @@ public class GroupRouter {
             groupMesageAsync.bolkCk(bot, event);
             // 第三方api
             groupMesageAsync.girlImg(bot, event);
+            // 彩票
+            groupMesageAsync.powerball(bot, event);
         }
     }
 }

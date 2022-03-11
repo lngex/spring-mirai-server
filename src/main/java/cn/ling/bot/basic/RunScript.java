@@ -21,7 +21,7 @@ public class RunScript {
     public void start() throws FileNotFoundException {
         log.info("=====================加载excel===================");
         String s = FileUtils.pojertPath();
-        File file = new File(s + "\\user.xls");
+        File file = new File(s + "/user.xls");
         if(!file.exists()){
             return;
         }
