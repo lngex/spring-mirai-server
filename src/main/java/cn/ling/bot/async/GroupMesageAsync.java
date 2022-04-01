@@ -267,7 +267,7 @@ public class GroupMesageAsync {
         }
         long groupId = event.getGroupId();
         String atqq = "<at qq=\"" + Objects.requireNonNull(bot.getLoginInfo()).getUserId() + "\"/>";
-        if (groupId == 757850203L && event.getRawMessage().contains(atqq)) {
+        if (event.getRawMessage().contains(atqq)) {
             List<OnebotBase.Message> messageList = event.getMessageList();
             for (OnebotBase.Message e : messageList) {
                 if ("text".equals(e.getType())) {
@@ -280,7 +280,7 @@ public class GroupMesageAsync {
                     break;
                 }
             }
-        } else if (groupId != 757850203L) {
+        } else if (groupId != 757850203L && ThreadLocalRandom.current().nextInt(0, 100) > 50) {
             List<OnebotBase.Message> messageList = event.getMessageList();
             for (OnebotBase.Message e : messageList) {
                 if ("text".equals(e.getType())) {
@@ -341,42 +341,51 @@ public class GroupMesageAsync {
         if ("看妹子".equals(rawMsg) || "看美女".equals(rawMsg)) {
             if (b) {
                 int i = ThreadLocalRandom.current().nextInt(0, 10);
-                if (i > 3 || 1902156923L == userId) {
+                if (i < 8 || 1902156923L == userId) {
                     // 判断积分
                     User user = MapConstant.GROUPUSERMAP.get(groupId + userId);
-                    if (user == null || user.getIntegrate().compareTo(new BigDecimal("50")) < 0) {
+                    if (user == null || user.getIntegrate().compareTo(new BigDecimal("10")) < 0) {
                         Msg.builder().text("积分不足").at(userId).sendToGroup(bot, groupId);
                         return;
                     } else {
-                        user.setIntegrate(user.getIntegrate().subtract(new BigDecimal("50")));
+                        user.setIntegrate(user.getIntegrate().subtract(new BigDecimal("10")));
                         MapConstant.GROUPUSERMAP.put(groupId + userId, user);
                         datePersistenceAsync.userPersistence();
                     }
-                    int c = ThreadLocalRandom.current().nextInt(0, 2);
+                    int c = ThreadLocalRandom.current().nextInt(0, 3);
                     /*http://ovooa.com/API/bizhi/api.php?msg=1*/
                     if (c == 0) {
-                        String s = HttpClientUtils.doGet("http://xiaobai.klizi.cn/API/img/beauty.php?data=&");
+                        String s = HttpClientUtils.doGet("http://api.lingfeng.press/api/pcmnt.php");
                         Msg.builder().at(userId).image(s).sendToGroup(bot, groupId);
                     } else if (c == 1) {
-                        String s = HttpClientUtils.doGet("http://xiaobai.klizi.cn/API/video/spzm.php?data=&msg=美女&n=2000");
-                        Msg.builder().video(s, "https://img0.baidu.com/it/u=452766850,4195928701&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=1082", false).sendToGroup(bot, groupId);
+                        String s = HttpClientUtils.doGet("https://api.linhun.vip/api/Littlesistervideo?type=json");
+                        com.alibaba.fastjson.JSONObject jsonObject = com.alibaba.fastjson.JSONObject.parseObject(s);
+                        String video = jsonObject.getJSONArray("video").getString(0);
+                        Msg.builder().video(video, "http://api.lingfeng.press/api/pcmnt.php", false).sendToGroup(bot, groupId);
+                    } else if (c == 2) {
+                        String s = HttpClientUtils.doGet("http://ovooa.com/API/meinv/api.php?type=text");
+                        Msg.builder().image(s).sendToGroup(bot, groupId);
                     }
                     return;
                 } else {
-                    bot.setGroupBan(groupId, userId, 10 * 60 * 60);
+                    bot.setGroupBan(groupId, userId, 10 * 60);
                     Msg.builder().image("http://lkaa.top/API/pai/?msg=不可以色色").at(userId).sendToGroup(bot, groupId);
                     return;
                 }
             }
-            // http://xiaobai.klizi.cn/API/video/spzm.php?data=&msg=%E7%BE%8E%E5%A5%B3&n=2000
-            int i = ThreadLocalRandom.current().nextInt(0, 2);
+            int c = ThreadLocalRandom.current().nextInt(0, 3);
             /*http://ovooa.com/API/bizhi/api.php?msg=1*/
-            if (i == 0) {
-                String s = HttpClientUtils.doGet("http://xiaobai.klizi.cn/API/img/beauty.php?data=&");
+            if (c == 0) {
+                String s = HttpClientUtils.doGet("http://api.lingfeng.press/api/pcmnt.php");
                 Msg.builder().at(userId).image(s).sendToGroup(bot, groupId);
-            } else if (i == 1) {
-                String s = HttpClientUtils.doGet("http://xiaobai.klizi.cn/API/video/spzm.php?data=&msg=美女&n=2000");
-                Msg.builder().video(s, "https://img0.baidu.com/it/u=452766850,4195928701&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=1082", false).sendToGroup(bot, groupId);
+            } else if (c == 1) {
+                String s = HttpClientUtils.doGet("https://api.linhun.vip/api/Littlesistervideo?type=json");
+                com.alibaba.fastjson.JSONObject jsonObject = com.alibaba.fastjson.JSONObject.parseObject(s);
+                String video = jsonObject.getJSONArray("video").getString(0);
+                Msg.builder().video(video, "http://api.lingfeng.press/api/pcmnt.php", false).sendToGroup(bot, groupId);
+            } else if (c == 2) {
+                String s = HttpClientUtils.doGet("http://ovooa.com/API/meinv/api.php?type=text");
+                Msg.builder().image(s).sendToGroup(bot, groupId);
             }
         } else if ("舔狗日记".equals(rawMsg)) {
             String s = HttpClientUtils.doGet("http://tianyi.qrspeed.pro/api/tiangou.php");
@@ -861,7 +870,7 @@ public class GroupMesageAsync {
         String rawMessage = event.getRawMessage().trim();
         if (rawMessage.startsWith("购买彩票") && rawMessage.length() > 4) {
             String number = rawMessage.substring(4).trim();
-            if (number.length() != 6 || number.contains(" ")) {
+            if (number.length() != 6 || number.contains(" ") || number.startsWith("0")) {
                 Msg.builder().at(event.getUserId()).text("购买失败，彩票格式错误").sendToGroup(bot, event.getGroupId());
                 return;
             }
@@ -876,22 +885,53 @@ public class GroupMesageAsync {
             if (user == null) {
                 Msg.builder().at(event.getUserId()).text("购买失败，积分不足，你当前积分为0").sendToGroup(bot, event.getGroupId());
             } else if (user.getIntegrate().compareTo(new BigDecimal("2")) < 0) {
-                Msg.builder().at(event.getUserId()).text("购买失败，积分不足，你当前积分为"+user.getIntegrate()).sendToGroup(bot, event.getGroupId());
-            }else {
-                String key = event.getGroupId() + ":" + event.getUserId()+":"+ Objects.requireNonNull(bot.getLoginInfo()).getUserId();
+                Msg.builder().at(event.getUserId()).text("购买失败，积分不足，你当前积分为" + user.getIntegrate()).sendToGroup(bot, event.getGroupId());
+            } else {
+                String key = event.getGroupId() + ":" + event.getUserId() + ":" + Objects.requireNonNull(bot.getLoginInfo()).getUserId();
                 List<Integer> integers = MapConstant.POWERBALL.get(key);
-                if(integers == null){
+                if (integers == null) {
                     integers = new ArrayList<>();
                 }
                 integers.add(integer);
-                MapConstant.POWERBALL.put(key,integers);
+                MapConstant.POWERBALL.put(key, integers);
                 user.setIntegrate(user.getIntegrate().subtract(new BigDecimal("2")));
-                MapConstant.GROUPUSERMAP.put(event.getGroupId() + event.getUserId(),user);
+                MapConstant.GROUPUSERMAP.put(event.getGroupId() + event.getUserId(), user);
                 datePersistenceAsync.userPersistence();
                 Msg.builder().at(event.getUserId()).text("购买成功，请耐心等待开奖").sendToGroup(bot, event.getGroupId());
             }
-        }else if("彩票系统".equals(rawMessage)){
+        } else if ("彩票系统".equals(rawMessage)) {
             Msg.builder().text(PublicConstant.POWERBALL).sendToGroup(bot, event.getGroupId());
+        } else if ("彩票".equals(rawMessage)) {
+            String key = event.getGroupId() + ":" + event.getUserId() + ":" + Objects.requireNonNull(bot.getLoginInfo()).getUserId();
+            List<Integer> integers = MapConstant.POWERBALL.get(key);
+            if (integers == null || integers.size() == 0) {
+                Msg.builder().at(event.getUserId()).text("您没有购买彩票").sendToGroup(bot, event.getGroupId());
+            } else {
+                StringBuilder str = new StringBuilder();
+                for (Integer s : integers) {
+                    str.append(s).append("-");
+                }
+                Msg.builder().at(event.getUserId()).text("您当前购买彩票有：" + str.substring(0, str.length() - 1)).sendToGroup(bot, event.getGroupId());
+            }
+        }
+    }
+
+    /**
+     * 疫情查询
+     *
+     * @param bot   机器人对象
+     * @param event 时间对象
+     */
+    @Async
+    public void epidemic(Bot bot, OnebotEvent.GroupMessageEvent event) {
+        String trim = event.getRawMessage().trim();
+        if (trim.length() > 3) {
+            String substring = trim.substring(2);
+            /* 🌾查询地区：成都 🌾目前确诊：1250 🌾目前死亡：3 🌾目前治愈：1159 🌾更新时间：3月28日17时31分 🌾数据来自：人民网 */
+            String s = HttpClientUtils.doGet(String.format(PublicConstant.YQ, substring));
+            if (StringUtils.hasText(s)) {
+                Msg.builder().text(s.replaceAll(" ", "\n").replaceAll("天一","黄帽")).sendToGroup(bot, event.getGroupId());
+            }
         }
     }
 }

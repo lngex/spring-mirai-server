@@ -195,6 +195,9 @@ public class MyPlugin extends BotPlugin {
         }else if(rawMessage.startsWith("修改名片")){
             groupMesageAsync.updateName(bot,event);
             return 1;
+        }else if(rawMessage.startsWith("疫情")){
+            groupMesageAsync.epidemic(bot,event);
+            return 1;
         }else if(rawMessage.contains("我是说")
                 || rawMessage.contains("我就说")
                 || rawMessage.contains("原来")

@@ -21,6 +21,10 @@ public interface PublicConstant {
      */
     String SW = "http://zy.xywlapi.cc/qqcx?qq=%s";
     /**
+     * 疫情
+     */
+    String YQ = "https://wwi.mxyx.live/api/yq.php?msg=%s";
+    /**
      * 菜单
      */
     String MENU = "" +
@@ -77,5 +81,5 @@ public interface PublicConstant {
             "规则：全中=》一等奖，前5中=》二等奖，前4中=》三等奖1\n" +
             "     前3中=》四等奖,前2中=》五等奖，第一个中=》六等奖\n"+
             "每次消耗2积分，每天22点开奖\n"+
-            "参与方式：发送购买彩票xxxxxx（x必须为数字）";
+            "参与方式：发送购买彩票xxxxxx（x必须为数字且不能以0开头）";
 }

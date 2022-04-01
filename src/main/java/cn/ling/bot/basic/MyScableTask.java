@@ -94,8 +94,8 @@ public class MyScableTask {
             groups.stream().filter(IntercepterPlugin.GROUPS::contains).forEach(g -> {
                 Msg.builder().text("------->本期彩票开奖号码为" + number + "<--------\n" +
                         "一等奖获得者:" + str + "\n" +
-                        "一等奖获得者:" + str2 + "\n" +
-                        "一等奖获得者:" + str3 + "\n"
+                        "二等奖获得者:" + str2 + "\n" +
+                        "三等奖获得者:" + str3 + "\n"
                 ).sendToGroup(bot, g);
             });
         });
