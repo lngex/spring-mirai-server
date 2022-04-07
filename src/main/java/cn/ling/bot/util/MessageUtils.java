@@ -1,6 +1,8 @@
 package cn.ling.bot.util;
 
 import cn.ling.bot.basic.constant.MapConstant;
+import onebot.OnebotBase;
+import onebot.OnebotEvent;
 import org.springframework.util.StringUtils;
 
 import java.util.*;
@@ -52,6 +54,31 @@ public class MessageUtils {
         return Integer.parseInt(number);
     }
 
+    /**
+     * 获取事件qq
+     * 1.消息体中存在qq且qq必须在消息体索引1处
+     * 2.若条件1不满足则qq必须在字符串最后
+     * @param event 事件对象
+     * @param prefix 前缀
+     * @return qq
+     */
+    public static long getQq(OnebotEvent.GroupMessageEvent event,int prefix){
+        List<OnebotBase.Message> messageList = event.getMessageList();
+        String rawMessage = event.getRawMessage().trim();
+        String qq = null;
+        if (messageList.size() == 2) {
+            qq = messageList.get(1).getDataMap().get("qq");
+        } else if (messageList.size() == 1 && rawMessage.length() >= (prefix+8)) {
+            qq = rawMessage.substring(prefix);
+        }
+        long l;
+        try {
+           l = Long.parseLong(qq);
+        }catch (Exception e){
+            l = 0;
+        }
+        return l;
+    }
 
     public static void main(String[] args) {
         HashMap<String, Integer> map = new HashMap<>();

@@ -53,6 +53,8 @@ public class GroupRouter {
             groupMesageAsync.allRename(bot, event);
             // 彩票
             groupMesageAsync.powerball(bot, event);
+            // 投票游戏
+            //groupMesageAsync.voteGame(bot, event);
         } else if (1050122161L == groupId) {
             groupMesageAsync.test(bot, event);
             groupMesageAsync.girlImg(bot, event);

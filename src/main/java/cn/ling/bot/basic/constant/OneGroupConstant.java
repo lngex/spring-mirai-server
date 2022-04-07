@@ -12,8 +12,15 @@ import java.util.List;
  * @since 1.0.0
  */
 public interface OneGroupConstant {
+    /**
+     * 超级管理员
+     */
+    List<Long> SUPERADMINS = new ArrayList<>();
+    /**
+     * 管理员
+     */
+    List<Long> ADMINS = new ArrayList<>();
 
-    List<Long> BLACKLIST = new ArrayList<>();
 
     public interface Role {
         /**
@@ -112,10 +119,12 @@ public interface OneGroupConstant {
                 "你m",
                 "nmlgb",
                 "nmd",
+                "鸡儿",
                 "65310162-F7A5-1673-B943-E482F205CA7B",
                 "D034F63A-B380-2BD7-549F-6C0B33FF2F46",
                 "D034F63AB3802BD7549F6C0B33FF2F46"
         };
+        List<String> BANNEDWORD_LIST = new ArrayList<>();
         /**
          * 白名单
          */

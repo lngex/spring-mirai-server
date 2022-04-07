@@ -208,7 +208,19 @@ public class MyPlugin extends BotPlugin {
             /* http://tva1.sinaimg.cn/large/006APoFYly8gw4ulbqwedj304g03amx0.jpg */
             Msg.builder().at(event.getUserId()).image("http://tva1.sinaimg.cn/large/006APoFYly8gw4ulbqwedj304g03amx0.jpg").sendToGroup(bot,event.getGroupId());
             return 1;
-        } else {
+        }else if(rawMessage.startsWith("添加违禁词")){
+            groupMesageAsync.bannedword(bot,event);
+            return 1;
+        }else if(rawMessage.startsWith("添加管理员")){
+            groupMesageAsync.addAdmin(bot,event);
+            return 1;
+        } else if("查看管理员".equals(rawMessage)){
+            groupMesageAsync.lookAdmin(bot,event);
+            return 1;
+        }  else if("违禁词列表".equals(rawMessage)){
+            groupMesageAsync.bannedwordList(bot,event);
+            return 1;
+        }else {
             groupRouter.router(bot, event);
         }
         return MESSAGE_IGNORE;

@@ -5,6 +5,5 @@ spring:
       - cn.ling.bot.plugin.AtBotPlugin # 艾特插件
       - cn.ling.bot.plugin.LogPlugin # 日志插件
       - cn.ling.bot.plugin.MyPlugin # 我的插件
-
 server:
   port: 8081

@@ -210,7 +210,7 @@ public class GroupMesageAsync {
     public void bannedWord(Bot bot, OnebotEvent.GroupMessageEvent event) {
         String rawMessage = event.getRawMessage().toUpperCase();
         // 违禁词检测
-        for (String e : OneGroupConstant.bannedWord.BANNEDWORD) {
+        for (String e : OneGroupConstant.bannedWord.BANNEDWORD_LIST) {
             String max = e.toUpperCase();
             if (rawMessage.contains(max)) {
                 long groupId = event.getGroupId();
@@ -271,24 +271,36 @@ public class GroupMesageAsync {
             List<OnebotBase.Message> messageList = event.getMessageList();
             for (OnebotBase.Message e : messageList) {
                 if ("text".equals(e.getType())) {
-                    String re = HttpClientUtils.doGet(String.format(PublicConstant.MINAI, MessageUtils.toBe(HttpClientUtils.format(e.getDataMap().get("text")))));
-                    Gson gson = new Gson();
-                    MinAi mainAi1 = gson.fromJson(re, MinAi.class);
-                    if (mainAi1 != null && !StringUtils.isEmpty(mainAi1.getText())) {
-                        bot.sendGroupMsg(event.getGroupId(), MessageUtils.toMe(mainAi1.getText()), false);
+                    String s = e.getDataMap().get("text").trim();
+                    if (s.startsWith("说") && s.length() > 1) {
+                        log.info("语音发送：{}", s.substring(1));
+                        Msg.builder().tts(s.substring(1)).sendToGroup(bot, event.getGroupId());
+                    } else {
+                        String re = HttpClientUtils.doGet(String.format(PublicConstant.MINAI, MessageUtils.toBe(HttpClientUtils.format(s))));
+                        Gson gson = new Gson();
+                        MinAi mainAi1 = gson.fromJson(re, MinAi.class);
+                        if (mainAi1 != null && !StringUtils.isEmpty(mainAi1.getText())) {
+                            bot.sendGroupMsg(event.getGroupId(), MessageUtils.toMe(mainAi1.getText()), false);
+                        }
                     }
                     break;
                 }
             }
-        } else if (groupId != 757850203L && ThreadLocalRandom.current().nextInt(0, 100) > 50) {
+        } else if (groupId != 757850203L && ThreadLocalRandom.current().nextInt(0, 100) > 70) {
             List<OnebotBase.Message> messageList = event.getMessageList();
             for (OnebotBase.Message e : messageList) {
                 if ("text".equals(e.getType())) {
-                    String re = HttpClientUtils.doGet(String.format(PublicConstant.MINAI, MessageUtils.toBe(HttpClientUtils.format(e.getDataMap().get("text")))));
-                    Gson gson = new Gson();
-                    MinAi mainAi1 = gson.fromJson(re, MinAi.class);
-                    if (mainAi1 != null && !StringUtils.isEmpty(mainAi1.getText())) {
-                        bot.sendGroupMsg(event.getGroupId(), MessageUtils.toMe(mainAi1.getText()), false);
+                    String s = e.getDataMap().get("text").trim();
+                    if (s.startsWith("说") && s.length() > 1) {
+                        Msg.builder().tts(s.substring(1)).sendToGroup(bot, event.getGroupId());
+                        log.info("语音发送：{}", s.substring(1));
+                    } else {
+                        String re = HttpClientUtils.doGet(String.format(PublicConstant.MINAI, MessageUtils.toBe(HttpClientUtils.format(s))));
+                        Gson gson = new Gson();
+                        MinAi mainAi1 = gson.fromJson(re, MinAi.class);
+                        if (mainAi1 != null && !StringUtils.isEmpty(mainAi1.getText())) {
+                            bot.sendGroupMsg(event.getGroupId(), MessageUtils.toMe(mainAi1.getText()), false);
+                        }
                     }
                     break;
                 }
@@ -930,8 +942,68 @@ public class GroupMesageAsync {
             /* 🌾查询地区：成都 🌾目前确诊：1250 🌾目前死亡：3 🌾目前治愈：1159 🌾更新时间：3月28日17时31分 🌾数据来自：人民网 */
             String s = HttpClientUtils.doGet(String.format(PublicConstant.YQ, substring));
             if (StringUtils.hasText(s)) {
-                Msg.builder().text(s.replaceAll(" ", "\n").replaceAll("天一","黄帽")).sendToGroup(bot, event.getGroupId());
+                Msg.builder().text(s.replaceAll(" ", "\n").replaceAll("天一", "黄帽")).sendToGroup(bot, event.getGroupId());
             }
         }
     }
+
+    /**
+     * 添加违禁词
+     *
+     * @param bot   机器人对象
+     * @param event 事件
+     */
+    @Async
+    public void bannedword(Bot bot, OnebotEvent.GroupMessageEvent event) {
+        String trim = event.getRawMessage().trim();
+        if (trim.length() > 5 && (OneGroupConstant.SUPERADMINS.contains(event.getUserId()) || OneGroupConstant.ADMINS.contains(event.getUserId()))) {
+            OneGroupConstant.bannedWord.BANNEDWORD_LIST.add(trim.substring(5));
+            Msg.builder().at(event.getUserId()).text("违禁词已添加").sendToGroup(bot, event.getGroupId());
+        }
+    }
+
+    /**
+     * 添加管理员
+     *
+     * @param bot   机器人对象
+     * @param event 事件
+     */
+    @Async
+    public void addAdmin(Bot bot, OnebotEvent.GroupMessageEvent event) {
+        if (OneGroupConstant.SUPERADMINS.contains(event.getUserId())) {
+            long qq = MessageUtils.getQq(event, 5);
+            if (qq == 1) {
+                Msg.builder().at(event.getUserId()).text("QQ格式错误").sendToGroup(bot, event.getGroupId());
+            } else {
+                OneGroupConstant.ADMINS.add(qq);
+                Msg.builder().at(event.getUserId()).text("添加成功，发送查看管理员可查看已添加的管理员").sendToGroup(bot, event.getGroupId());
+            }
+        } else {
+            Msg.builder().at(event.getUserId()).text("你没有操作权限").sendToGroup(bot, event.getGroupId());
+        }
+    }
+
+    /**
+     * 查看管理员
+     *
+     * @param bot   机器人对象
+     * @param event 事件
+     */
+    @Async
+    public void lookAdmin(Bot bot, OnebotEvent.GroupMessageEvent event) {
+        Msg.builder().at(event.getUserId()).text(OneGroupConstant.ADMINS.toString()).sendToGroup(bot, event.getGroupId());
+    }
+
+    /**
+     * 查看违禁词
+     *
+     * @param bot   机器人对象
+     * @param event 事件
+     */
+    @Async
+    public void bannedwordList(Bot bot, OnebotEvent.GroupMessageEvent event) {
+        Msg.builder().at(event.getUserId()).text(OneGroupConstant.bannedWord.BANNEDWORD_LIST.toString()).sendToGroup(bot, event.getGroupId());
+    }
+
+
 }

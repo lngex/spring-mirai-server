@@ -2,9 +2,6 @@ package cn.ling.bot.util;
 
 import cn.ling.bot.basic.constant.PublicConstant;
 
-import java.io.IOException;
-import java.lang.reflect.InvocationTargetException;
-
 /**
  * TODO
  *
@@ -15,9 +12,9 @@ import java.lang.reflect.InvocationTargetException;
 public class TestUtils {
 
 
-    public static void main(String[] args) throws IOException, InvocationTargetException, IllegalAccessException, InstantiationException {
+    public static void main(String[] args) {
         String s = HttpClientUtils.doGet(String.format(PublicConstant.YQ, "成都"));
-        System.out.println(s);
+        System.out.println(s.replaceAll(" ", "\n").replaceAll("天一","黄帽"));
     }
 }
 
@@ -66,5 +63,9 @@ public class TestUtils {
                  ", name='" + name + '\'' +
                  ", sex='" + sex + '\'' +
                  '}';
+     }
+
+     public static void main(String[] args) {
+         System.out.println("123");
      }
  }

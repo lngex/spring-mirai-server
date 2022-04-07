@@ -90,44 +90,7 @@ public class DateUtil {
         }
         return null;
     }
-static class User{
-        String name;
-        String age;
-
-    public User(String name, String age) {
-        this.name = name;
-        this.age = age;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public User setName(String name) {
-        this.name = name;
-        return this;
-    }
-
-    public String getAge() {
-        return age;
-    }
-
-    public User setAge(String age) {
-        this.age = age;
-        return this;
-    }
-}
-
     public static void main(String[] args) {
-        User user = new User("谢鹏", "18");
-        Gson gson = new Gson();
-        String s = gson.toJson(user);
-        System.out.println(s);
-        byte[] bytes1 = s.getBytes(StandardCharsets.UTF_8);
-        String string = Arrays.toString(bytes1);
-        System.out.println(string);
-        byte[] bytes = string.getBytes(StandardCharsets.UTF_8);
-        String string1 = Arrays.toString(bytes);
-        System.out.println(string1);
+        System.out.println(date());
     }
 }

@@ -3,6 +3,7 @@ package cn.ling.bot.basic;
 import cn.afterturn.easypoi.excel.ExcelImportUtil;
 import cn.afterturn.easypoi.excel.entity.ImportParams;
 import cn.ling.bot.basic.constant.MapConstant;
+import cn.ling.bot.basic.constant.OneGroupConstant;
 import cn.ling.bot.basic.domain.User;
 import lombok.extern.slf4j.Slf4j;
 import cn.ling.bot.util.FileUtils;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Component;
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import java.io.*;
+import java.util.Arrays;
 import java.util.List;
 
 @Component
@@ -37,6 +39,10 @@ public class RunScript {
         } catch (Exception e) {
             log.info("=====================群员列表加载失败==================={}{}",e.getMessage(),e);
         }
+        log.info("==========================违禁词添加=======================");
+        OneGroupConstant.bannedWord.BANNEDWORD_LIST.addAll(Arrays.asList(OneGroupConstant.bannedWord.BANNEDWORD));
+        log.info("==========================管理员添加=======================");
+        OneGroupConstant.SUPERADMINS.add(1902156923L);
     }
 
     @PreDestroy
