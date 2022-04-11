@@ -17,8 +17,6 @@ import java.util.List;
  */
 public class IntercepterPlugin extends BotPlugin {
 
-
-    // private final long[] groups = {757850203L,1050122161L,793893098L};
     /**
      * 允许群聊的群
      */

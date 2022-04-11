@@ -1,6 +1,11 @@
 package cn.ling.bot.util;
 
 import cn.ling.bot.basic.constant.PublicConstant;
+import com.alibaba.fastjson.JSONObject;
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
+
+import java.util.Arrays;
 
 /**
  * TODO
@@ -13,59 +18,22 @@ public class TestUtils {
 
 
     public static void main(String[] args) {
-        String s = HttpClientUtils.doGet(String.format(PublicConstant.YQ, "成都"));
-        System.out.println(s.replaceAll(" ", "\n").replaceAll("天一","黄帽"));
+        String s = HttpClientUtils.doGet("https://api.linhun.vip/api/Littlesistervideo?type=json");
+        System.out.println(s);
+        JSONObject jsonObject = JSONObject.parseObject(s);
+        String video = jsonObject.getString("video");
+    }
+
+
+    public static int[] twoSum(int[] nums, int target) {
+        int length = nums.length;
+        for (int x = 0; x < length; x++) {
+            for (int y = x + 1; y < length; y++) {
+                if (nums[x] + nums[y] == target) {
+                    return new int[]{x,y};
+                }
+            }
+        }
+        return new int[]{};
     }
 }
-
- class User{
-    private Integer age;
-    private String name;
-    private String sex;
-
-    public User(Integer age, String name, String sex) {
-        this.age = age;
-        this.name = name;
-        this.sex = sex;
-    }
-
-    public Integer getAge() {
-        return age;
-    }
-
-    public User setAge(Integer age) {
-        this.age = age;
-        return this;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public User setName(String name) {
-        this.name = name;
-        return this;
-    }
-
-    public String getSex() {
-        return sex;
-    }
-
-    public User setSex(String sex) {
-        this.sex = sex;
-        return this;
-    }
-
-     @Override
-     public String toString() {
-         return "User{" +
-                 "age=" + age +
-                 ", name='" + name + '\'' +
-                 ", sex='" + sex + '\'' +
-                 '}';
-     }
-
-     public static void main(String[] args) {
-         System.out.println("123");
-     }
- }

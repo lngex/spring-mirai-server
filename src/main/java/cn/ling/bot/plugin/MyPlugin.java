@@ -82,7 +82,7 @@ public class MyPlugin extends BotPlugin {
         } else if ("其他".equals(rawMessage)) {
             Msg.builder().text(PublicConstant.OTHER).sendToGroup(bot, event.getGroupId());
             return 1;
-        }else if("日常".equals(rawMessage)){
+        } else if ("日常".equals(rawMessage)) {
             Msg.builder().text(PublicConstant.EVERYDAY).sendToGroup(bot, event.getGroupId());
             return 1;
         } else if (rawMessage.startsWith("禁言") && b) {
@@ -119,7 +119,7 @@ public class MyPlugin extends BotPlugin {
             Msg.builder().at(Long.parseLong(qq)).text("你已被管理员禁言，请注意发言");
         } else if (rawMessage.startsWith("解除禁言") && b) {
             List<OnebotBase.Message> messageList = event.getMessageList();
-            if (messageList.size() == 2) {
+            if (messageList.size() == 2 || (messageList.size() == 3 && "at".equals(messageList.get(1).getType()))) {
                 String qq = messageList.get(1).getDataMap().get("qq");
                 bot.setGroupBan(event.getGroupId(), Long.parseLong(qq), 0);
             }
@@ -155,7 +155,7 @@ public class MyPlugin extends BotPlugin {
         } else if (rawMessage.startsWith("解除拉黑") && b) {
             List<OnebotBase.Message> messageList = event.getMessageList();
             String qq = null;
-            if (messageList.size() == 2) {
+            if (messageList.size() == 2 || (messageList.size() == 3 && "at".equals(messageList.get(1).getType()))) {
                 qq = messageList.get(1).getDataMap().get("qq");
             } else if (messageList.size() == 1 && rawMessage.length() >= 12) {
                 qq = rawMessage.substring(4);
@@ -181,46 +181,46 @@ public class MyPlugin extends BotPlugin {
                 }
             }
             return 1;
-        }else if("抽奖".equals(rawMessage)){
-            groupMesageAsync.lottery(bot,event);
-        }else if(rawMessage.startsWith("点歌")){
-            groupMesageAsync.song(bot,event);
+        } else if ("抽奖".equals(rawMessage)) {
+            groupMesageAsync.lottery(bot, event);
+        } else if (rawMessage.startsWith("点歌")) {
+            groupMesageAsync.song(bot, event);
             return 1;
-        }else if("签到".equals(rawMessage) || "打卡".equals(rawMessage)){
-            groupMesageAsync.singin(bot,event);
+        } else if ("签到".equals(rawMessage) || "打卡".equals(rawMessage)) {
+            groupMesageAsync.singin(bot, event);
             return 1;
-        }else if("查看积分".equals(rawMessage) || "钱包".equals(rawMessage)){
-            groupMesageAsync.lookMoney(bot,event);
+        } else if ("查看积分".equals(rawMessage) || "钱包".equals(rawMessage)) {
+            groupMesageAsync.lookMoney(bot, event);
             return 1;
-        }else if(rawMessage.startsWith("修改名片")){
-            groupMesageAsync.updateName(bot,event);
+        } else if (rawMessage.startsWith("修改名片")) {
+            groupMesageAsync.updateName(bot, event);
             return 1;
-        }else if(rawMessage.startsWith("疫情")){
-            groupMesageAsync.epidemic(bot,event);
+        } else if (rawMessage.startsWith("疫情")) {
+            groupMesageAsync.epidemic(bot, event);
             return 1;
-        }else if(rawMessage.contains("我是说")
+        } else if (rawMessage.contains("我是说")
                 || rawMessage.contains("我就说")
                 || rawMessage.contains("原来")
                 || rawMessage.contains("原本")
                 || rawMessage.contains("因为")
                 || rawMessage.contains("以前")
-                || rawMessage.contains("之前")){
+                || rawMessage.contains("之前")) {
             /* http://tva1.sinaimg.cn/large/006APoFYly8gw4ulbqwedj304g03amx0.jpg */
-            Msg.builder().at(event.getUserId()).image("http://tva1.sinaimg.cn/large/006APoFYly8gw4ulbqwedj304g03amx0.jpg").sendToGroup(bot,event.getGroupId());
+            Msg.builder().at(event.getUserId()).image("http://tva1.sinaimg.cn/large/006APoFYly8gw4ulbqwedj304g03amx0.jpg").sendToGroup(bot, event.getGroupId());
             return 1;
-        }else if(rawMessage.startsWith("添加违禁词")){
-            groupMesageAsync.bannedword(bot,event);
+        } else if (rawMessage.startsWith("添加违禁词")) {
+            groupMesageAsync.bannedword(bot, event);
             return 1;
-        }else if(rawMessage.startsWith("添加管理员")){
-            groupMesageAsync.addAdmin(bot,event);
+        } else if (rawMessage.startsWith("添加管理员")) {
+            groupMesageAsync.addAdmin(bot, event);
             return 1;
-        } else if("查看管理员".equals(rawMessage)){
-            groupMesageAsync.lookAdmin(bot,event);
+        } else if ("查看管理员".equals(rawMessage)) {
+            groupMesageAsync.lookAdmin(bot, event);
             return 1;
-        }  else if("违禁词列表".equals(rawMessage)){
-            groupMesageAsync.bannedwordList(bot,event);
+        } else if ("违禁词列表".equals(rawMessage)) {
+            groupMesageAsync.bannedwordList(bot, event);
             return 1;
-        }else {
+        } else {
             groupRouter.router(bot, event);
         }
         return MESSAGE_IGNORE;

@@ -208,7 +208,7 @@ public class GroupMesageAsync {
      */
     @Async
     public void bannedWord(Bot bot, OnebotEvent.GroupMessageEvent event) {
-        String rawMessage = event.getRawMessage().toUpperCase();
+        String rawMessage = StringUtil.removeAllBlank(event.getRawMessage().toUpperCase());
         // 违禁词检测
         for (String e : OneGroupConstant.bannedWord.BANNEDWORD_LIST) {
             String max = e.toUpperCase();
@@ -372,7 +372,7 @@ public class GroupMesageAsync {
                     } else if (c == 1) {
                         String s = HttpClientUtils.doGet("https://api.linhun.vip/api/Littlesistervideo?type=json");
                         com.alibaba.fastjson.JSONObject jsonObject = com.alibaba.fastjson.JSONObject.parseObject(s);
-                        String video = jsonObject.getJSONArray("video").getString(0);
+                        String video = jsonObject.getString("video");
                         Msg.builder().video(video, "http://api.lingfeng.press/api/pcmnt.php", false).sendToGroup(bot, groupId);
                     } else if (c == 2) {
                         String s = HttpClientUtils.doGet("http://ovooa.com/API/meinv/api.php?type=text");

@@ -24,7 +24,7 @@ public class RunScript {
         log.info("=====================加载excel===================");
         String s = FileUtils.pojertPath();
         File file = new File(s + "/user.xls");
-        if(!file.exists()){
+        if (!file.exists()) {
             return;
         }
         try(InputStream inputStream = new FileInputStream(file)) {
