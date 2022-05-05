@@ -14,6 +14,9 @@ import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
 import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ThreadLocalRandom;
+import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * TODO
@@ -30,6 +33,56 @@ public class MyScableTask {
 
     @Autowired
     private DatePersistenceAsync datePersistenceAsync;
+
+    public static void main(String[] args) throws InterruptedException {
+        String str = "-------------------------";
+        String horse = "\uD83D\uDC0E";
+        AtomicInteger atomicInteger = new AtomicInteger(0);
+        AtomicInteger i = new AtomicInteger(0);
+        // 储存名次
+        Map<Integer, Integer> map1 = new ConcurrentHashMap<>();
+        // 储存赛马
+        HashMap<Integer, Integer> map = new HashMap<>();
+        map.put(1, 26);
+        map.put(2, 26);
+        map.put(3, 26);
+        map.put(4, 26);
+        int size = map.size();
+        // 在所有赛马的成绩出来后就停止赛马
+        while (map1.size() < size) {
+            Thread.sleep(2000);
+            // 储存每次循环结果通知
+            StringBuilder builder1 = new StringBuilder("");
+            map.entrySet().parallelStream().filter(e -> {
+                // 储存到达终点的马成绩并停止奔跑
+                if (e.getValue() <= 1) {
+                    return false;
+                }
+                return true;
+            }).forEach(e -> {
+                // 每次循环奔跑步数
+                e.setValue(e.getValue() - ThreadLocalRandom.current().nextInt(1, 6));
+                if (e.getValue() <= 1 && map1.get(e.getKey()) == null) {
+                    map1.put(e.getKey(), atomicInteger.incrementAndGet());
+                }
+            });
+            builder1.append("第").append(i.incrementAndGet()).append("场").append("\n");
+            // 获取名次自增加
+            AtomicInteger atomicInteger1 = new AtomicInteger(0);
+            // 获取每场结果
+            map.entrySet().forEach(e -> {
+                if (e.getValue() < 1) {
+                    e.setValue(1);
+                }
+                StringBuilder builder = new StringBuilder(str);
+                builder1.append(builder.insert(0, atomicInteger1.incrementAndGet()).insert(e.getValue(), horse)).append("\n");
+            });
+            System.out.println(builder1);
+            System.out.println(map);
+            System.out.println(map1);
+        }
+        System.out.println(map1);
+    }
 
     @Scheduled(cron = "0 0 0 */1 * ?")
     public void task1() {
@@ -100,5 +153,15 @@ public class MyScableTask {
             });
         });
         MapConstant.POWERBALL.clear();
+    }
+
+    /**
+     * 赛马
+     * 每晚20点进行
+     * 🐎
+     */
+    @Scheduled(cron = "0 0 20 * * ?")
+    public void task3() {
+
     }
 }
