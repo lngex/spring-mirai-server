@@ -87,7 +87,11 @@ public class MyScableTask {
     @Scheduled(cron = "0 0 0 */1 * ?")
     public void task1() {
         MapConstant.GROUPUSERMAP.values().forEach(e -> {
-            e.setIsSingin(false);
+            if(e.getIsSingin()){
+                e.setIsSingin(false);
+            }else {
+                e.setSinginDay(0);
+            }
         });
     }
 

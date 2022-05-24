@@ -1,26 +1,18 @@
 package cn.ling.bot.util;
 
-import cn.ling.bot.basic.constant.OneGroupConstant;
-import cn.ling.bot.basic.constant.PublicConstant;
-import cn.ling.bot.basic.constant.xml.XmlConstant;
-import com.google.gson.Gson;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.MediaType;
-import org.springframework.http.converter.StringHttpMessageConverter;
-import org.springframework.web.client.RestTemplate;
+import cn.hutool.core.img.ImgUtil;
+import cn.hutool.core.io.FileUtil;
 
+import java.awt.*;
 import java.net.NetworkInterface;
 import java.net.SocketException;
-import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Enumeration;
-import java.util.HashMap;
 import java.util.List;
-import java.util.concurrent.ThreadLocalRandom;
+import java.util.StringJoiner;
 
 /**
- * TODO
+ *
  *
  * @author LiaoJianbo
  * @version 1.0.0
@@ -29,8 +21,6 @@ import java.util.concurrent.ThreadLocalRandom;
 public class TestUtils {
 
 
-    public static void main(String[] args) throws SocketException {
-    }
     public static List<String> getMACAddress() throws SocketException {
         Enumeration<NetworkInterface> nis = NetworkInterface.getNetworkInterfaces();
         List<String> list = new ArrayList<>();

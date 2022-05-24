@@ -243,7 +243,7 @@ public class MyPlugin extends BotPlugin {
         OnebotApi.GetStrangerInfoResp strangerInfo = bot.getStrangerInfo(userId);
         int level = strangerInfo.getLevel();
         User user = MapConstant.GROUPUSERMAP.get(userId + groupId);
-        if ((user == null || !user.getIsBolk()) && level > 15) {
+        if ((user == null || !user.getIsBolk()) && level > 14) {
             bot.setGroupAddRequest(event.getFlag(), event.getSubType(), true, "");
         } else {
             bot.setGroupAddRequest(event.getFlag(), event.getSubType(), false, "QQ等级未达到15级，拒绝加入");

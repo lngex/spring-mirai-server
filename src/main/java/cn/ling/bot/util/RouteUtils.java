@@ -1,7 +1,13 @@
 package cn.ling.bot.util;
 
+import org.apache.tomcat.util.http.fileupload.FileUtils;
 import org.springframework.util.StringUtils;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.nio.ByteBuffer;
+import java.nio.channels.FileChannel;
 import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 
@@ -31,16 +37,16 @@ public class RouteUtils {
         return 0;
     }
 
-    public static void main(String[] args) {
-        String str1 = "abcdefg*&^7";
-        String str2 = "简书谢谢，。";
-        byte[] bytes = str1.getBytes(StandardCharsets.UTF_8);
-        System.out.println("str1：" + Arrays.toString(bytes));
-        byte[] bytes1 = str2.getBytes(StandardCharsets.UTF_8);
-        System.out.println("str2：" + Arrays.toString(bytes1));
-        bytes1[1] = -82;
-        String string = new String(bytes1, StandardCharsets.UTF_8);
-        System.out.println(Arrays.toString(bytes1));
-        System.out.println(string);
+    public static void main(String[] args) throws Exception {
+        File file = new File("E:\\嗨创project\\辞职信.docx");
+        System.out.println(file.getName());
+        FileInputStream fileInputStream = new FileInputStream(file);
+        System.out.println(file.getName());
+        FileChannel channel = fileInputStream.getChannel();
+        ByteBuffer[] byteBuffers = new ByteBuffer[(int) channel.size()];
+        channel.read(byteBuffers);
+        FileOutputStream fileOutputStream = new FileOutputStream("E:\\嗨创project\\辞职信2.docx");
+        FileChannel channel1 = fileOutputStream.getChannel();
+        channel1.write(byteBuffers);
     }
 }

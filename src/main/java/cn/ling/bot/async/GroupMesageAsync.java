@@ -353,7 +353,7 @@ public class GroupMesageAsync {
         if ("看妹子".equals(rawMsg) || "看美女".equals(rawMsg)) {
             if (b) {
                 int i = ThreadLocalRandom.current().nextInt(0, 10);
-                if (i < 8 || 1902156923L == userId) {
+                if (i < 6 || 1902156923L == userId) {
                     // 判断积分
                     User user = MapConstant.GROUPUSERMAP.get(groupId + userId);
                     if (user == null || user.getIntegrate().compareTo(new BigDecimal("10")) < 0) {
@@ -375,20 +375,14 @@ public class GroupMesageAsync {
                         String video = jsonObject.getString("video");
                         Msg.builder().video(video, "http://api.lingfeng.press/api/pcmnt.php", false).sendToGroup(bot, groupId);
                     } else if (c == 2) {
-                        String s = HttpClientUtils.doGet("https://yuelapi.top/API/swfwefvd/wallpa.php?msg=1");
-                        while (true) {
-                            if (s.length() > 6) {
-                                Msg.builder().image(s.substring(5, s.length() - 1)).sendToGroup(bot, groupId);
-                                return;
-                            }
-                        }
+                        String s = HttpClientUtils.doGet("https://api.linhun.vip/api/Littlesister?type=json");
+                        com.alibaba.fastjson.JSONObject jsonObject = com.alibaba.fastjson.JSONObject.parseObject(s);
+                        Msg.builder().image(jsonObject.getString("img")).sendToGroup(bot, groupId);
                     } else if (c == 3) {
                         String s = HttpClientUtils.doGet("http://tianyi.qrspeed.pro/api/cos.php");
                         Msg.builder().image(s).sendToGroup(bot, groupId);
                     } else if (c == 4) {
-                        String s = HttpClientUtils.doGet(String.format("https://yuelapi.top/API/swfwefvd/beauty.php?n=%s", ThreadLocalRandom.current().nextInt(0, 9)));
-                        String substring = s.substring(5, s.length() - 1);
-                        Msg.builder().image(substring).sendToGroup(bot, groupId);
+                        Msg.builder().image("http://tianyi.qrspeed.pro/api/pcmnt.php").sendToGroup(bot, groupId);
                     }
                     return;
                 } else {
@@ -400,13 +394,9 @@ public class GroupMesageAsync {
             int c = ThreadLocalRandom.current().nextInt(0, 5);
             /*http://ovooa.com/API/bizhi/api.php?msg=1*/
             if (c == 0) {
-                String s = HttpClientUtils.doGet("https://yuelapi.top/API/swfwefvd/wallpa.php?msg=1");
-                while (true) {
-                    if (s.length() > 6) {
-                        Msg.builder().image(s.substring(5, s.length() - 1)).sendToGroup(bot, groupId);
-                        return;
-                    }
-                }
+                String s = HttpClientUtils.doGet("https://api.linhun.vip/api/Littlesister?type=json");
+                com.alibaba.fastjson.JSONObject jsonObject = com.alibaba.fastjson.JSONObject.parseObject(s);
+                Msg.builder().image(jsonObject.getString("img")).sendToGroup(bot, groupId);
             } else if (c == 1) {
                 String s = HttpClientUtils.doGet("https://api.linhun.vip/api/Littlesistervideo?type=json");
                 com.alibaba.fastjson.JSONObject jsonObject = com.alibaba.fastjson.JSONObject.parseObject(s);
@@ -419,9 +409,7 @@ public class GroupMesageAsync {
                 String s = HttpClientUtils.doGet("http://tianyi.qrspeed.pro/api/cos.php");
                 Msg.builder().image(s).sendToGroup(bot, groupId);
             } else if (c == 4) {
-                String s = HttpClientUtils.doGet(String.format("https://yuelapi.top/API/swfwefvd/beauty.php?n=%s", ThreadLocalRandom.current().nextInt(0, 9)));
-                String substring = s.substring(5, s.length() - 1);
-                Msg.builder().image(substring).sendToGroup(bot, groupId);
+                Msg.builder().image("http://tianyi.qrspeed.pro/api/pcmnt.php").sendToGroup(bot, groupId);
             }
         } else if ("舔狗日记".equals(rawMsg)) {
             String s = HttpClientUtils.doGet("http://tianyi.qrspeed.pro/api/tiangou.php");
@@ -761,6 +749,7 @@ public class GroupMesageAsync {
                 user.setGroupId(groupId);
                 user.setQq(userId);
                 user.setIntegrate(new BigDecimal("10"));
+                user.setSinginDay(1);
                 Msg.builder().at(userId).text("今日打卡成功，奖励10积分").sendToGroup(bot, groupId);
                 MapConstant.GROUPUSERMAP.put(groupId + userId, user);
                 datePersistenceAsync.userPersistence();
@@ -775,9 +764,18 @@ public class GroupMesageAsync {
                         bot.setGroupBan(groupId, userId, 2 * 60);
                     }
                 } else {
-                    user.setIntegrate(user.getIntegrate().add(new BigDecimal("10")));
+                    BigDecimal add = new BigDecimal("9").add(new BigDecimal(user.getSinginDay().toString()));
+                    if(user.getSinginDay().equals(0)){
+                        add = new BigDecimal("10");
+                    }
+                    user.setIntegrate(user.getIntegrate().add(add));
                     user.setIsSingin(true);
-                    Msg.builder().at(userId).text("今日打卡成功，奖励10积分").sendToGroup(bot, groupId);
+                    user.setSinginDay(user.getSinginDay() + 1);
+                    String str = "今日打卡成功，奖励10积分";
+                    if (user.getSinginDay() > 1) {
+                        str = "连续打卡" + user.getSinginDay() + "天,获得积分" + (add) + "分";
+                    }
+                    Msg.builder().at(userId).text(str).sendToGroup(bot, groupId);
                     datePersistenceAsync.userPersistence();
                 }
             }

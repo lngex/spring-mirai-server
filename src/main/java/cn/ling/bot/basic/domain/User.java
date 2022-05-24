@@ -41,4 +41,9 @@ public class User implements Serializable {
      * 是否已签到
      */
     private Boolean isSingin = false;
+    /**
+     * 连续打卡天数
+     */
+    @Excel(name = "连续打卡天数")
+    private Integer singinDay = 0;
 }

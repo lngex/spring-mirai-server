@@ -25,11 +25,19 @@ public class AtBotPlugin extends BotPlugin {
 
     private static final ArrayList<String> URLS = new ArrayList<>();
 
+    private static final ArrayList<String> recallNotice = new ArrayList<>();
+
 
     static {
         URLS.add("http://wx4.sinaimg.cn/large/006APoFYly1g9cl9foknsj306306omx8.jpg");
         URLS.add("https://imgsa.baidu.com/forum/w%3D580/sign=b565f4e959e736d158138c00ab504ffc/b5da861001e939012c54370b76ec54e736d196b0.jpg");
-        URLS.add("http://abc.gaoxiaozi.com/d/file/201709/dd133afebe911fcee47bfb042b5c8f0d.jpg");
+        URLS.add("http://bqtu6.haocaa.com:66/tp/article/228/2_nev1q__.jpg");
+        URLS.add("https://img.julinghu.com/2021/09/20210927024931509.jpg");
+        recallNotice.add("https://img1.baidu.com/it/u=3525343135,3005609710&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=375");
+        recallNotice.add("http://ww3.sinaimg.cn/bmiddle/6af89bc8gw1f8tzig4q3xj205i04bt8k.jpg");
+        recallNotice.add("https://img1.baidu.com/it/u=1217767715,1632402249&fm=253&fmt=auto&app=138&f=JPEG?w=200&h=200");
+        recallNotice.add("https://img2.baidu.com/it/u=1123776011,2032142517&fm=253&fmt=auto&app=120&f=GIF?w=216&h=212");
+        recallNotice.add("https://img.julinghu.com/2021/09/20210927024931509.jpg");
     }
 
     /**
@@ -75,7 +83,7 @@ public class AtBotPlugin extends BotPlugin {
             return 0;
         }
         Msg.builder().at(event.getUserId())
-                .image("http://ww3.sinaimg.cn/bmiddle/6af89bc8gw1f8tzig4q3xj205i04bt8k.jpg")
+                .image(recallNotice.get(ThreadLocalRandom.current().nextInt(0, recallNotice.size())))
                 .sendToGroup(bot, event.getGroupId());
         return MESSAGE_BLOCK;
 
