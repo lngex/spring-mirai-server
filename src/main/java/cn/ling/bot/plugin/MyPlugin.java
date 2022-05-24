@@ -130,6 +130,8 @@ public class MyPlugin extends BotPlugin {
                 qq = messageList.get(1).getDataMap().get("qq");
             } else if (messageList.size() == 1 && rawMessage.length() >= 10) {
                 qq = rawMessage.substring(2);
+            }else if((messageList.size() == 3 && "at".equals(messageList.get(1).getType()))){
+                qq = messageList.get(1).getDataMap().get("qq");
             }
             if (StringUtils.hasText(qq) && qq.length() >= 8) {
                 try {
