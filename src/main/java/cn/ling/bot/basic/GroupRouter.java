@@ -35,24 +35,24 @@ public class GroupRouter {
             // 小爱聊天
             groupMesageAsync.minAi(bot,event);
             // 第三方api
-            groupMesageAsync.girlImg(bot, event);
+            // groupMesageAsync.girlImg(bot, event);
             // 按入群时间排序
-            groupMesageAsync.joinSort(bot, event);
+            // groupMesageAsync.joinSort(bot, event);
             // 动漫
             // groupMesageAsync.lookCartoon(bot,event);
             // 闪照破解
-            groupMesageAsync.flashImgCrack(bot, event);
+            // groupMesageAsync.flashImgCrack(bot, event);
             // 刷屏检测
             groupMesageAsync.spam(bot, event);
             // 黑名单
             groupMesageAsync.bolkList(bot, event);
             groupMesageAsync.bolkCk(bot, event);
             // 网易点歌
-            groupMesageAsync.neteaseMusic(bot, event);
+            // groupMesageAsync.neteaseMusic(bot, event);
             // 全体改名
-            groupMesageAsync.allRename(bot, event);
+            // groupMesageAsync.allRename(bot, event);
             // 彩票
-            groupMesageAsync.powerball(bot, event);
+            //groupMesageAsync.powerball(bot, event);
             // 投票游戏
             //groupMesageAsync.voteGame(bot, event);
         } else if (1050122161L == groupId) {
@@ -89,6 +89,10 @@ public class GroupRouter {
             groupMesageAsync.girlImg(bot, event);
             // 彩票
             groupMesageAsync.powerball(bot, event);
+            // 打卡签到
+            groupMesageAsync.singin(bot, event);
+            // 查看积分
+            groupMesageAsync.lookMoney(bot, event);
         }
     }
 }

@@ -286,7 +286,7 @@ public class GroupMesageAsync {
                     break;
                 }
             }
-        } else if (groupId != 757850203L && ThreadLocalRandom.current().nextInt(0, 100) > 70) {
+        } else if (groupId != 757850203L && ThreadLocalRandom.current().nextInt(0, 100) > 50) {
             List<OnebotBase.Message> messageList = event.getMessageList();
             for (OnebotBase.Message e : messageList) {
                 if ("text".equals(e.getType())) {
@@ -364,7 +364,7 @@ public class GroupMesageAsync {
                         MapConstant.GROUPUSERMAP.put(groupId + userId, user);
                         datePersistenceAsync.userPersistence();
                     }
-                    int c = ThreadLocalRandom.current().nextInt(0, 5);
+                    int c = ThreadLocalRandom.current().nextInt(0, 4);
                     /*http://ovooa.com/API/bizhi/api.php?msg=1*/
                     if (c == 0) {
                         String s = HttpClientUtils.doGet("http://api.lingfeng.press/api/pcmnt.php");
@@ -374,14 +374,10 @@ public class GroupMesageAsync {
                         com.alibaba.fastjson.JSONObject jsonObject = com.alibaba.fastjson.JSONObject.parseObject(s);
                         String video = jsonObject.getString("video");
                         Msg.builder().video(video, "http://api.lingfeng.press/api/pcmnt.php", false).sendToGroup(bot, groupId);
-                    } else if (c == 2) {
-                        String s = HttpClientUtils.doGet("https://api.linhun.vip/api/Littlesister?type=json");
-                        com.alibaba.fastjson.JSONObject jsonObject = com.alibaba.fastjson.JSONObject.parseObject(s);
-                        Msg.builder().image(jsonObject.getString("img")).sendToGroup(bot, groupId);
-                    } else if (c == 3) {
+                    }else if (c == 2) {
                         String s = HttpClientUtils.doGet("http://tianyi.qrspeed.pro/api/cos.php");
                         Msg.builder().image(s).sendToGroup(bot, groupId);
-                    } else if (c == 4) {
+                    } else if (c == 3) {
                         Msg.builder().image("http://tianyi.qrspeed.pro/api/pcmnt.php").sendToGroup(bot, groupId);
                     }
                     return;
@@ -391,24 +387,19 @@ public class GroupMesageAsync {
                     return;
                 }
             }
-            int c = ThreadLocalRandom.current().nextInt(0, 5);
-            /*http://ovooa.com/API/bizhi/api.php?msg=1*/
+            int c = ThreadLocalRandom.current().nextInt(0, 4);
             if (c == 0) {
-                String s = HttpClientUtils.doGet("https://api.linhun.vip/api/Littlesister?type=json");
-                com.alibaba.fastjson.JSONObject jsonObject = com.alibaba.fastjson.JSONObject.parseObject(s);
-                Msg.builder().image(jsonObject.getString("img")).sendToGroup(bot, groupId);
-            } else if (c == 1) {
                 String s = HttpClientUtils.doGet("https://api.linhun.vip/api/Littlesistervideo?type=json");
                 com.alibaba.fastjson.JSONObject jsonObject = com.alibaba.fastjson.JSONObject.parseObject(s);
                 String video = jsonObject.getString("video");
                 Msg.builder().video(video, "http://api.lingfeng.press/api/pcmnt.php", false).sendToGroup(bot, groupId);
-            } else if (c == 2) {
+            } else if (c == 1) {
                 String s = HttpClientUtils.doGet("http://ovooa.com/API/meinv/api.php?type=text");
                 Msg.builder().image(s).sendToGroup(bot, groupId);
-            } else if (c == 3) {
+            } else if (c == 2) {
                 String s = HttpClientUtils.doGet("http://tianyi.qrspeed.pro/api/cos.php");
                 Msg.builder().image(s).sendToGroup(bot, groupId);
-            } else if (c == 4) {
+            } else if (c == 3) {
                 Msg.builder().image("http://tianyi.qrspeed.pro/api/pcmnt.php").sendToGroup(bot, groupId);
             }
         } else if ("舔狗日记".equals(rawMsg)) {

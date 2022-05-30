@@ -185,15 +185,6 @@ public class MyPlugin extends BotPlugin {
             return 1;
         } else if ("抽奖".equals(rawMessage)) {
             groupMesageAsync.lottery(bot, event);
-        } else if (rawMessage.startsWith("点歌")) {
-            groupMesageAsync.song(bot, event);
-            return 1;
-        } else if ("签到".equals(rawMessage) || "打卡".equals(rawMessage)) {
-            groupMesageAsync.singin(bot, event);
-            return 1;
-        } else if ("查看积分".equals(rawMessage) || "钱包".equals(rawMessage)) {
-            groupMesageAsync.lookMoney(bot, event);
-            return 1;
         } else if (rawMessage.startsWith("修改名片")) {
             groupMesageAsync.updateName(bot, event);
             return 1;
