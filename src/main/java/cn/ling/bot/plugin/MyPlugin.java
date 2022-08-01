@@ -204,6 +204,9 @@ public class MyPlugin extends BotPlugin {
         } else if (rawMessage.startsWith("添加违禁词")) {
             groupMesageAsync.bannedword(bot, event);
             return 1;
+        }  else if (rawMessage.startsWith("删除违禁词")) {
+            groupMesageAsync.delbannedword(bot, event);
+            return 1;
         } else if (rawMessage.startsWith("添加管理员")) {
             groupMesageAsync.addAdmin(bot, event);
             return 1;

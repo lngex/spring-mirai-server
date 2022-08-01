@@ -31,8 +31,8 @@ public class AtBotPlugin extends BotPlugin {
     static {
         URLS.add("http://wx4.sinaimg.cn/large/006APoFYly1g9cl9foknsj306306omx8.jpg");
         URLS.add("https://imgsa.baidu.com/forum/w%3D580/sign=b565f4e959e736d158138c00ab504ffc/b5da861001e939012c54370b76ec54e736d196b0.jpg");
-        URLS.add("http://bqtu6.haocaa.com:66/tp/article/228/2_nev1q__.jpg");
-        URLS.add("https://img.julinghu.com/2021/09/20210927024931509.jpg");
+        URLS.add("https://imgsa.baidu.com/forum/w%3D580/sign=689ca9caf01f4134e0370576151e95c1/3745f558ccbf6c814e8818c1b13eb13532fa40a7.jpg");
+        URLS.add("https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fimg.adoutu.com%2Fpicture%2F1538469134324.jpg&refer=http%3A%2F%2Fimg.adoutu.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1660469111&t=07188a88f9bc5bc28e2d1f6c67523d1e");
         recallNotice.add("https://img1.baidu.com/it/u=3525343135,3005609710&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=375");
         recallNotice.add("http://ww3.sinaimg.cn/bmiddle/6af89bc8gw1f8tzig4q3xj205i04bt8k.jpg");
         recallNotice.add("https://img1.baidu.com/it/u=1217767715,1632402249&fm=253&fmt=auto&app=138&f=JPEG?w=200&h=200");

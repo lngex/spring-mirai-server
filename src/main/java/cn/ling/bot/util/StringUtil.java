@@ -5,6 +5,7 @@ import java.io.RandomAccessFile;
 import java.nio.ByteBuffer;
 import java.nio.channels.FileChannel;
 import java.nio.charset.StandardCharsets;
+import java.util.Arrays;
 import java.util.Random;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -14,6 +15,8 @@ import java.util.regex.Pattern;
  * Description 字符串工具类
  */
 public class StringUtil {
+
+    static byte[] base = new byte[]{-17, -65, -67};
 
     /**
      * 是否为数字
@@ -188,6 +191,26 @@ public class StringUtil {
             sb.append(str.charAt(number));
         }
         return sb.toString();
+    }
+
+    /**
+     * 字节截取
+     *
+     * @param len 字节长度
+     * @param str 被截取的字符串
+     * @return 截取后
+     */
+    public static String intercept(int len, String str) {
+        byte[] bytes = str.getBytes(StandardCharsets.UTF_8);
+        if (bytes.length > len) {
+            byte[] bytes1 = Arrays.copyOf(bytes, len);
+            str = new String(bytes1, StandardCharsets.UTF_8);
+            byte[] bytes2 = str.substring(str.length() - 1).getBytes(StandardCharsets.UTF_8);
+            if (Arrays.equals(base, bytes2)) {
+                str = str.substring(0, str.length() - 1);
+            }
+        }
+        return str;
     }
 
     public static void main(String[] args) throws IOException {

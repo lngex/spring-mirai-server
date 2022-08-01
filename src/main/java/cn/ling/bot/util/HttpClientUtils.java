@@ -14,16 +14,15 @@ import org.apache.http.impl.client.HttpClients;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URI;
 import java.util.*;
+import java.util.concurrent.ThreadLocalRandom;
 
-/**
- * 用于发送Http请求
- *
- * @author King
- */
+
 public class HttpClientUtils {
+
     public static String doGet(String url, Map<String, String> param) {
         // 创建Httpclient对象
         CloseableHttpClient httpclient = HttpClients.createDefault();
@@ -146,9 +145,4 @@ public class HttpClientUtils {
         }
         return resultString;
     }
-
-    public static void main(String[] args) {
-
-    }
-
 }

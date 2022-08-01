@@ -1,20 +1,33 @@
 package cn.ling.bot.controller;
 
+import org.apache.http.entity.ContentType;
 import org.springframework.context.annotation.Bean;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.BufferedImageHttpMessageConverter;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.imageio.ImageIO;
+import javax.servlet.ServletOutputStream;
+import javax.servlet.http.HttpServletResponse;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.*;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 
+/**
+ * @author King
+ */
 @RestController
 public class ImageController {
+
+    public static void main(String[] args) {
+
+
+    }
 
     // 如果需要返回BufferedImage，必须有下面的converter。如果没有converter只能返回[]byte。
     @Bean
@@ -50,8 +63,16 @@ public class ImageController {
         return ImageIO.read(url);
     }
 
-    public static void main(String[] args) {
-
-
+    @GetMapping("/test")
+    public void test(HttpServletResponse response) {
+        try (ServletOutputStream outputStream = response.getOutputStream()) {
+            response.setContentType(ContentType.DEFAULT_TEXT.getMimeType());
+            response.setCharacterEncoding(StandardCharsets.UTF_8.name());
+            byte[] bytes = "程序即将退出".getBytes(StandardCharsets.UTF_8);
+            outputStream.write(bytes);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        System.exit(0);
     }
 }

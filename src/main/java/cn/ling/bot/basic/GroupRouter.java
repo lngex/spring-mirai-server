@@ -27,13 +27,13 @@ public class GroupRouter {
         long groupId = event.getGroupId();
         if (757850203L == groupId) {
             // 改名检测
-            groupMesageAsync.oneRename(bot, event);
+            // groupMesageAsync.oneRename(bot, event);
             // 投票踢人
             groupMesageAsync.voteOut(bot, event);
             // 违禁词处理
             groupMesageAsync.bannedWord(bot, event);
             // 小爱聊天
-            groupMesageAsync.minAi(bot,event);
+            groupMesageAsync.minAi(bot, event);
             // 第三方api
             // groupMesageAsync.girlImg(bot, event);
             // 按入群时间排序
@@ -93,6 +93,10 @@ public class GroupRouter {
             groupMesageAsync.singin(bot, event);
             // 查看积分
             groupMesageAsync.lookMoney(bot, event);
+            // 网易点歌
+            groupMesageAsync.neteaseMusic(bot, event);
+            //点歌
+            groupMesageAsync.song(bot, event);
         }
     }
 }

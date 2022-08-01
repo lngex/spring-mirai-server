@@ -286,25 +286,6 @@ public class GroupMesageAsync {
                     break;
                 }
             }
-        } else if (groupId != 757850203L && ThreadLocalRandom.current().nextInt(0, 100) > 50) {
-            List<OnebotBase.Message> messageList = event.getMessageList();
-            for (OnebotBase.Message e : messageList) {
-                if ("text".equals(e.getType())) {
-                    String s = e.getDataMap().get("text").trim();
-                    if (s.startsWith("说") && s.length() > 1) {
-                        Msg.builder().tts(s.substring(1)).sendToGroup(bot, event.getGroupId());
-                        log.info("语音发送：{}", s.substring(1));
-                    } else {
-                        String re = HttpClientUtils.doGet(String.format(PublicConstant.MINAI, MessageUtils.toBe(HttpClientUtils.format(s))));
-                        Gson gson = new Gson();
-                        MinAi mainAi1 = gson.fromJson(re, MinAi.class);
-                        if (mainAi1 != null && !StringUtils.isEmpty(mainAi1.getText())) {
-                            bot.sendGroupMsg(event.getGroupId(), MessageUtils.toMe(mainAi1.getText()), false);
-                        }
-                    }
-                    break;
-                }
-            }
         }
     }
 
@@ -323,16 +304,7 @@ public class GroupMesageAsync {
      * @param card 名片
      */
     public String cardCheckout(String card) {
-        if (!StringUtils.isEmpty(card) && card.getBytes(StandardCharsets.UTF_8).length > 60) {
-            card = new String(Arrays.copyOf(card.getBytes(StandardCharsets.UTF_8), 60));
-            int length = card.length();
-            byte[] bytes = card.substring(length - 1, length).getBytes(StandardCharsets.UTF_8);
-            byte[] b = {-17, -65, -67};
-            if (Arrays.equals(b, bytes)) {
-                card = card.substring(0, length - 1);
-            }
-        }
-        return card;
+        return StringUtil.intercept(60,card);
     }
 
     /**
@@ -374,7 +346,7 @@ public class GroupMesageAsync {
                         com.alibaba.fastjson.JSONObject jsonObject = com.alibaba.fastjson.JSONObject.parseObject(s);
                         String video = jsonObject.getString("video");
                         Msg.builder().video(video, "http://api.lingfeng.press/api/pcmnt.php", false).sendToGroup(bot, groupId);
-                    }else if (c == 2) {
+                    } else if (c == 2) {
                         String s = HttpClientUtils.doGet("http://tianyi.qrspeed.pro/api/cos.php");
                         Msg.builder().image(s).sendToGroup(bot, groupId);
                     } else if (c == 3) {
@@ -689,6 +661,9 @@ public class GroupMesageAsync {
     @Async
     public void song(Bot bot, OnebotEvent.GroupMessageEvent event) {
         String rawMessage = event.getRawMessage().trim();
+        if(!rawMessage.startsWith("点歌")){
+            return;
+        }
         if (rawMessage.length() <= 2) {
             Msg.builder().at(event.getUserId()).text("点歌失败，爬！").sendToGroup(bot, event.getGroupId());
             return;
@@ -756,7 +731,7 @@ public class GroupMesageAsync {
                     }
                 } else {
                     BigDecimal add = new BigDecimal("9").add(new BigDecimal(user.getSinginDay().toString()));
-                    if(user.getSinginDay().equals(0)){
+                    if (user.getSinginDay().equals(0)) {
                         add = new BigDecimal("10");
                     }
                     user.setIntegrate(user.getIntegrate().add(add));
@@ -972,6 +947,24 @@ public class GroupMesageAsync {
         if (trim.length() > 5 && (OneGroupConstant.SUPERADMINS.contains(event.getUserId()) || OneGroupConstant.ADMINS.contains(event.getUserId()))) {
             OneGroupConstant.bannedWord.BANNEDWORD_LIST.add(trim.substring(5));
             Msg.builder().at(event.getUserId()).text("违禁词已添加").sendToGroup(bot, event.getGroupId());
+        }
+    }
+
+    /**
+     * 删除违禁词
+     *
+     * @param bot   机器人对象
+     * @param event 事件
+     */
+    @Async
+    public void delbannedword(Bot bot, OnebotEvent.GroupMessageEvent event) {
+        String trim = event.getRawMessage().trim();
+        if (trim.length() > 5 && (OneGroupConstant.SUPERADMINS.contains(event.getUserId()) || OneGroupConstant.ADMINS.contains(event.getUserId()))) {
+            if ((OneGroupConstant.bannedWord.BANNEDWORD_LIST.remove(trim.substring(5)))) {
+                Msg.builder().at(event.getUserId()).text("违禁词已删除").sendToGroup(bot, event.getGroupId());
+            } else {
+                Msg.builder().at(event.getUserId()).text("删除失败，违禁词不存在").sendToGroup(bot, event.getGroupId());
+            }
         }
     }
 
