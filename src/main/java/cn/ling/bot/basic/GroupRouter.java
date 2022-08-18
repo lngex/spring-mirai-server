@@ -27,7 +27,7 @@ public class GroupRouter {
         long groupId = event.getGroupId();
         if (757850203L == groupId) {
             // 改名检测
-            // groupMesageAsync.oneRename(bot, event);
+            groupMesageAsync.oneRename(bot, event);
             // 投票踢人
             groupMesageAsync.voteOut(bot, event);
             // 违禁词处理
